@@ -3,13 +3,13 @@ package com.example.android.architecture.blueprints.todoapp.test.chapter5
 import android.app.Activity
 import android.app.Instrumentation
 import android.content.Intent
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.Espresso.openContextualActionModeOverflowMenu
+import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.intent.Intents.intending
 import androidx.test.espresso.intent.matcher.IntentMatchers.isInternal
 import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.platform.app.InstrumentationRegistry
 import com.example.android.architecture.blueprints.todoapp.R
 import com.example.android.architecture.blueprints.todoapp.tasks.TasksActivity
 import com.example.android.architecture.blueprints.todoapp.test.chapter1.data.TestData
@@ -36,8 +36,10 @@ class StubAllIntentsTest {
     private val taskTitleField = viewWithId(R.id.add_task_title)
     private val taskDescriptionField = viewWithId(R.id.add_task_description)
     private val editDoneFab = viewWithId(R.id.fab_edit_task_done)
+//    private val shareMenuItem =
+//            onView(allOf(withId(R.id.title), withText(R.string.share)))
     private val shareMenuItem =
-            onView(allOf(withId(R.id.title), withText(R.string.share)))
+            viewWithId(R.id.menu_share)
 
     @Before
     fun setUp() {
@@ -57,13 +59,13 @@ class StubAllIntentsTest {
     fun stubsShareIntent() {
         // adding new TO-DO
         addFab.click()
-        taskTitleField.type(toDoTitle).closeKeyboard()
-        taskDescriptionField.type(toDoDescription).closeKeyboard()
+        taskTitleField.replace(toDoTitle).closeKeyboard()
+        taskDescriptionField.replace(toDoDescription).closeKeyboard()
         editDoneFab.click()
         // verifying new TO-DO with title is shown in the TO-DO list
         viewWithText(toDoTitle).checkDisplayed()
-        openContextualActionModeOverflowMenu()
+//        openContextualActionModeOverflowMenu()
         shareMenuItem.click()
-        //viewWithText(toDoTitle).click()
+//        viewWithText(toDoTitle).click()
     }
 }

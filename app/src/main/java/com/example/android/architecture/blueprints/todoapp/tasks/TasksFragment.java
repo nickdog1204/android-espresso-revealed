@@ -189,7 +189,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
                 shareIntent.putExtra(Intent.EXTRA_TEXT, getTaskListAsArray());
                 shareIntent.putExtra(Intent.EXTRA_EMAIL, email);
                 startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.share_to)));
-                //startActivity(shareIntent);
+//                startActivity(shareIntent);
                 break;
         }
         return true;
